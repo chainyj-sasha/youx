@@ -2,9 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+use App\Http\Controllers\CategoryController;
+Route::get('/', [CategoryController::class, 'index'])->name('main_page');
 
-use App\Http\Controllers\NewsController;
-Route::resource('news', NewsController::class);
+
+
