@@ -10,26 +10,31 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::orderBy('sort', 'desc')->get();
-        $data = [];
-        foreach ($categories as $category){
-            $data[] = $category->articles()
-                ->where(function (Builder $builder){
-                    return $builder->where('is_active', 1);
-                })
-                ->get();
-        }
-        dump($data);
 
-        foreach($data as $item){
-            foreach($item as $article){
-                dump($article->title, $article->categories->created_at);
-            }
-        }
+        /**
+         * TODO Все херня, переделать!!!!
+         */
+//        $categories = Category::orderBy('sort', 'desc')->get();
+//        $data = [];
+//        foreach ($categories as $category){
+//            $data[] = $category->articles()
+//                ->where(function (Builder $builder){
+//                    return $builder->where('is_active', 1);
+//                })
+//                ->get();
+//        }
+//        dump($data);
+//
+//        foreach($data as $item){
+//            foreach($item as $article){
+//                dd($article->title);
+//            }
+//        }
 
-//        return view('category.index', [
-//            'title' => 'Категории',
-//            'data' => $data,
-//        ]);
+        return view('category.index', [
+            'title' => 'Категории',
+            //'data' => $data,
+
+        ]);
     }
 }

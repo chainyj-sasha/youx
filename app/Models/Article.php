@@ -9,6 +9,14 @@ class Article extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'title',
+        'slug',
+        'text',
+        'small_pic',
+        'big_pic',
+    ];
+
     public function categories()
     {
         return $this->belongsToMany(Category::class);

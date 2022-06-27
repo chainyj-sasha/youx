@@ -9,39 +9,14 @@
 </head>
 <body>
 
+<h1>Основная страница</h1>
+
 <form action="" method="post">
     @csrf
     <input name="search" type="text" placeholder="Поиск по заголовку статьи">
 </form>
 
 
-@foreach($data as $categories)
-
-
-
-    @foreach($categories as $article)
-
-{{--        <p>{{ $article->title }}</p>--}}
-
-    @endforeach
-
-@endforeach
-
-
-
-{{--@foreach($categories as $category)--}}
-
-{{--    <h3>Категория - {{ $category->title }}</h3>--}}
-
-{{--    @foreach($category->articles as $article)--}}
-{{--        @if($article->is_active)--}}
-{{--            <p>Картинка</p>--}}
-{{--            <p>{{ date('y-m-d', strtotime($article->created_at)) }}</p>--}}
-{{--            <p><a href="">{{ $article->title }}</a></p>--}}
-{{--        @endif--}}
-{{--    @endforeach--}}
-
-{{--@endforeach--}}
 
 
 </body>
