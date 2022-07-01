@@ -1,23 +1,33 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{ $title }}</title>
-</head>
-<body>
+@extends('layouts.app')
 
-<h1>Основная страница</h1>
+@section('title', $title)
 
-<form action="" method="post">
-    @csrf
-    <input name="search" type="text" placeholder="Поиск по заголовку статьи">
-</form>
+@section('content')
+
+    <h1>мы здесь</h1>
+    @if(auth()->check() && auth()->user()->admin)
+        <a href="/admin/category/">на админку</a>
+    @endif
 
 
+    <form action="{{ route('show_search_article') }}" method="get">
+        <input name="search" type="text" placeholder="Поиск по заголвку статьи">
+        <input type="submit" hidden>
+    </form>
 
+    @foreach($categories as $category)
+        Категория - {{ $category->title }}<br>
 
-</body>
-</html>
+        @foreach($category->articles as $article)
+            <img src="{{ asset('storage/' . $article->small_pic) }}" alt=""><br>
+            {{ date('Y-m-d', strtotime($article->created_at)) }}<br>
+            @if($article->text)
+                <a href="{{ route('article_show_one', ['id' => $article->id]) }}">{{ $article->title }}</a><br><br>
+            @else
+                {{ $article->title }}<br><br>
+            @endif
+        @endforeach
+
+    @endforeach
+
+@endsection
