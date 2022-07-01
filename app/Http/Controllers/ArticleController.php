@@ -20,8 +20,8 @@ class ArticleController extends Controller
 
     public function show_search_article(CategorySearchRequest $request)
     {
-        $articles = Article::where('title', 'like', '%'.$request->search.'%')->get();
-        //dd($articles);
+        $articles = Article::where('title', 'like', "%$request->search%")->get();
+
         return view('article.show_search_article', [
             'title' => 'Результат поиска',
             'articles' => $articles,

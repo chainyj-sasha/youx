@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\Admin\CategoryController;
 
+
 /* category */
 Route::get('/', [\App\Http\Controllers\CategoryController::class, 'index'])->name('category_index');
 

@@ -12,7 +12,7 @@
         <img src="{{ asset('storage/' . $article->small_pic) }}" alt="">
     @endif
 
-    <p>{{ $article->text }}</p>
+    <p>{!! $article->text !!}</p>
 
     <a href="{{ route('category_index') }}">Назад</a>
 

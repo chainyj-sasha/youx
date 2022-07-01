@@ -32,14 +32,11 @@ class CategoryController extends Controller
 
     public function store(AdminCategoryStoreRequest $request)
     {
-        if (auth()->check() && auth()->user()->admin){
-            Category::create([
-                'title' => $request->title,
-                'sort' => $request->sort,
-            ]);
-            return redirect()->route('category.index');
-        }
-        return abort(404, 'Not found');
+        Category::create([
+            'title' => $request->title,
+            'sort' => $request->sort,
+        ]);
+        return redirect()->route('category.index');
     }
 
     /**
@@ -63,23 +60,17 @@ class CategoryController extends Controller
 
     public function update(AdminCategoryUpdateRequest $request, Category $category)
     {
-        if (auth()->user()->admin){
-            $category->title = $request->title;
-            $category->sort = $request->sort;
-            $category->save();
+        $category->title = $request->title;
+        $category->sort = $request->sort;
+        $category->save();
 
-            return redirect()->route('category.edit', ['category' => $category]);
-        }
-        return abort(404, 'not found');
+        return redirect()->route('category.edit', ['category' => $category]);
     }
 
     public function destroy(Category $category)
     {
-        if (auth()->user()->admin){
-            $category->delete();
+        $category->delete();
 
-            return redirect()->route('category.index');
-        }
-        return abort(404, 'not found');
+        return redirect()->route('category.index');
     }
 }

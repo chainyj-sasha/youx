@@ -30,26 +30,25 @@ class ArticleController extends Controller
 
     public function store(AdminArticleStoreRequest $request)
     {
-        if (auth()->check() && auth()->user()->admin){
-            if ($request->has('big_pic')){
-                $image = $request->file('big_pic')->store('images', 'public');
-            }
-            if ($request->has('editor')){
-                $text = $request->input('editor');
-            }
-            $article = Article::create([
-                'title' => $request->input('title'),
-                'text' => $text ?? null,
-                'small_pic' => $request->file('small_pic')->store('images', 'public'),
-                'big_pic' => $image ?? null,
-                'is_active' => $request->input('is_active'),
-            ]);
-
-            $count = count($request->category);
-            for ($i = 0; $i < $count; $i++){
-                $article->categories()->attach($request->category[$i]);
-            }
+        if ($request->has('big_pic')){
+            $image = $request->file('big_pic')->store('images', 'public');
         }
+        if ($request->has('editor')){
+            $text = $request->input('editor');
+        }
+        $article = Article::create([
+            'title' => $request->input('title'),
+            'text' => $text ?? null,
+            'small_pic' => $request->file('small_pic')->store('images', 'public'),
+            'big_pic' => $image ?? null,
+            'is_active' => $request->input('is_active'),
+        ]);
+
+        $count = count($request->category);
+        for ($i = 0; $i < $count; $i++){
+            $article->categories()->attach($request->category[$i]);
+        }
+
         return redirect()->route('article.index');
     }
 
@@ -74,31 +73,26 @@ class ArticleController extends Controller
 
     public function update(AdminArticleUpdateRequest $request, Article $article)
     {
-        if (auth()->check() && auth()->user()->admin){
-            $article->title = $request->input('title');
-            $article->text = $request->input('editor');
-            if ($request->hasFile('small_pic')) {
-                $article->small_pic = $request->file('small_pic')->store('images', 'public');
-            }
-            if ($request->hasFile('big_pic')) {
-                $article->big_pic = $request->file('big_pic')->store('images', 'public');
-            }
-            $article->is_active = $request->input('is_active');
-
-            $article->save();
-
-            return redirect()->route('article.edit', ['article' => $article]);
+        $article->title = $request->input('title');
+        $article->text = $request->input('editor');
+        if ($request->hasFile('small_pic')) {
+            $article->small_pic = $request->file('small_pic')->store('images', 'public');
         }
+        if ($request->hasFile('big_pic')) {
+            $article->big_pic = $request->file('big_pic')->store('images', 'public');
+        }
+        $article->is_active = $request->input('is_active');
 
+        $article->save();
+
+        return redirect()->route('article.edit', ['article' => $article]);
     }
 
     public function destroy(Article $article)
     {
-        if (auth()->check() && auth()->user()->admin){
-            $article->delete();
-            $article->categories()->detach();
+        $article->delete();
+        $article->categories()->detach();
 
-            return redirect()->route('article.index');
-        }
+        return redirect()->route('article.index');
     }
 }
