@@ -26,32 +26,12 @@
 
     <h5>Комментировать статью</h5>
     <form id="commentForm">
+        <input type="hidden" value="{{ $article->id }}">
         <input name="name" type="text" placeholder="Ваше имя"><br><br>
         <input name="comment" type="text" placeholder="Текст кометария"><br><br>
         <input type="submit" id="submit">
     </form>
 
-    <script>
-        $('#commentForm').on('submit',function(event){
-            event.preventDefault();
-
-            let name = $('#name').val();
-            let comment = $('#comment').val();
-
-            $.ajax({
-                url: {{ route('store_comment', ['id' => $article->id]) }},
-                type:"POST",
-                data:{
-                    "_token": "{{ csrf_token() }}",
-                    name:name,
-                    comment:comment,
-                },
-                success:function(response){
-                    console.log(response);
-                },
-            });
-        });
-    </script>
 
     <a href="{{ route('category_index') }}">Назад</a>
 
