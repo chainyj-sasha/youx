@@ -25,8 +25,9 @@
     <p>{!! $article->text !!}</p>
 
     <h5>Комментировать статью</h5>
-    <form id="commentForm">
-        <input type="hidden" value="{{ $article->id }}">
+    <form id="commentForm" method="post">
+        @csrf
+        <input name="hidden_id" type="hidden" value="{{ $article->id }}">
         <input name="name" type="text" placeholder="Ваше имя"><br><br>
         <input name="comment" type="text" placeholder="Текст кометария"><br><br>
         <input type="submit" id="submit">

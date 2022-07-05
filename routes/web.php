@@ -16,7 +16,7 @@ Route::group(['prefix' => 'article'], function (){
 });
 
 /* comment */
-Route::post('/comment/{id}/create', [CommentController::class, 'store'])->name('store_comment');
+Route::post('/comment/create', [CommentController::class, 'store']);
 
 /* admin */
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function(){
