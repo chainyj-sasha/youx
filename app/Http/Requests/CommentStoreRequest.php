@@ -25,7 +25,7 @@ class CommentStoreRequest extends FormRequest
     {
         return [
             'name' => 'required|alpha',
-            'text' => 'required|min:50',
+            'text' => 'required|',
         ];
     }
 }

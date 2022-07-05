@@ -17,4 +17,9 @@ class CommentController extends Controller
 //        ]);
 //        return redirect()->route();
     }
+
+    public function create()
+    {
+
+    }
 }
