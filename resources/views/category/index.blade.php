@@ -19,7 +19,7 @@
         Категория - {{ $category->title }}<br>
 
         @foreach($category->articles as $article)
-            <img src="{{ asset('storage/' . $article->small_pic) }}" alt=""><br>
+            <img src="{{ asset('storage/' . $article->small_pic) }}" alt="" width="200" height="200"><br>
             {{ date('Y-m-d', strtotime($article->created_at)) }}<br>
             @if($article->text)
                 <a href="{{ route('article_show_one', ['id' => $article->id]) }}">{{ $article->title }}</a><br><br>
