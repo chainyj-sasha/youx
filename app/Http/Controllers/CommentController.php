@@ -8,18 +8,16 @@ use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
-    public function store(CommentStoreRequest $request, $id)
+    public function store(Request $request)
     {
-        dd($request->all());
-//        Comment::create([
-//            'name' => $request->name,
-//            'text' => $request->text,
-//        ]);
-//        return redirect()->route();
+        //dd($request->all());
+           $comment = Comment::create([
+               'name' => $request->name,
+               'text' => $request->text,
+           ]);
+
+           $comment->articles()->attach($request->id);
+       //return redirect()->route('category_index');
     }
 
-    public function create()
-    {
-
-    }
 }

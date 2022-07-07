@@ -5,24 +5,26 @@ $(document).ready(function () {
         }
     });
 
-
     $('#commentForm').on('submit',function(event){
+
         event.preventDefault();
 
         let id = $('#hidden_id').val();
         let name = $('#name').val();
-        let comment = $('#comment').val();
+        let text = $('#text').val();
 
         $.ajax({
-            url: "/comment/create/",
+            url: "/comment",
             method:"post",
             data:{
+                id:id,
                 name:name,
-                comment:comment,
+                text:text,
             },
             success:function(response){
                 console.log(response);
             },
         });
     });
+
 })
